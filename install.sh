@@ -37,10 +37,10 @@ Suites: ./
 URIs: http://download.opensuse.org/repositories/science:/EtherLab/Debian_12/
 EOT
 
-# Install qtpyvcp repositories
 echo ">> Installing curl: \n"
-sudo apt install curl
+sudo apt install -y curl
 
+# Install updated repository
 echo ">> Install QtPyVCP Repository \n "
 echo 'deb [arch=arm64] https://repository.qtpyvcp.com/apt stable main' | sudo tee /etc/apt/sources.list.d/kcjengr.list
 curl -sS https://repository.qtpyvcp.com/repo/kcjengr.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/kcjengr.gpg
@@ -56,7 +56,7 @@ echo "--------------------------------------------------"
 echo 
 
 echo ">> Installing libtool: \n"
-sudo apt install libtool
+sudo apt install -y libtool
 
 echo ">> Download Ethercat Master Source Code:"
 cd ~
@@ -85,8 +85,6 @@ echo " Trying to install without installing “ethercat-master” package, but s
 echo " At the end of this build process, script will notify they it is already installed."
 echo " User needs to answer “NO” to this prompt to maintain the manually installed version without EoE."
 echo
-
-cd ~
 
 sudo apt install -y linuxcnc-ethercat
 
@@ -124,4 +122,22 @@ echo "[Step:4] Install QtPyVCP:"
 echo "--------------------------------------------------"
 echo 
 
-sudo apt install python3-qtpyvcp
+sudo apt install -y python3-qtpyvcp
+
+#------------------------------------------------------------------------------------------- Custom Code
+
+echo "--------------------------------------------------"
+echo "[Step:5] Download Custom Code:"
+echo "--------------------------------------------------"
+echo 
+
+cd ~
+
+mkdir linuxcnc
+mkdir ./linuxcnc/config
+cd ./linuxcnc/config
+
+echo ">> Download hal-cia402 Source Code:"
+git clone https://github.com/adityapadaria/lcec-project
+
+#-------------------------------------------------------------------------------------------
