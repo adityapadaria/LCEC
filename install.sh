@@ -65,6 +65,8 @@ echo "\n>> Download Ethercat Master Source Code: \n "
 cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
+sudo su
+
 echo "\n>> Compile and Install Ethercat Master: \n "
 sudo cd /root/ethercat
 sudo autoupdate
@@ -89,6 +91,8 @@ sudo make modules
 sudo make install
 sudo make modules_install
 sudo depmod
+
+exit
 
 echo "\n------------------------------------------------------------------------------------------------------" # LinuxCNC EtherCAT Support Layer
 echo "[Step:4] Install linuxcnc-ethercat:"
