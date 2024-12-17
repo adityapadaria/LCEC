@@ -65,9 +65,27 @@ echo "\n>> Download Ethercat Master Source Code: \n "
 cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 echo "\n>> Compile and Install Ethercat Master: \n "
 cd /root/ethercat
-sudo autoupdate -f
+sudo autoupdate 
+
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 echo "\n>> Bootstrap: \n "
 sudo ./bootstrap
