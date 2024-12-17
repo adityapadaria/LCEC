@@ -100,6 +100,18 @@ while true; do
     esac
 done
 
+echo "\n>> Bootstrap: \n "
+sudo ./bootstrap
+
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 echo "\n>> Configure: \n "
 sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
 
