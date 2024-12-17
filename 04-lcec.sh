@@ -7,10 +7,10 @@ echo "--------------------------------------------------------------------------
 echo " "
 
 echo " "
-echo ">> Installing libethercat-dev: "
+echo ">> Installing libethercat-dev & golang: "
 echo " "
 
-sudo apt install -y libethercat-dev
+sudo apt install -y libethercat-dev golang
 
 echo " "
 echo ">> Download linuxcnc-ethercat: "
