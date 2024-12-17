@@ -62,29 +62,42 @@ echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
 
 echo "\n>> Download Ethercat Master Source Code: \n "
-cd ~
+# cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
 echo "\n>> Compile and Install Ethercat Master: \n "
-cd ethercat
+sudo su
+cd /root/ethercat
 sudo autoupdate
 sudo ./bootstrap
 
 while true; do
     read -p "Do you wish to install this program? " yn
     case $yn in
-        [Yy]* ) make install; break;;
+        [Yy]* ) break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
 sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
-sudo make
-sudo make modules
-sudo make install
-sudo make modules_install
-sudo depmod
+
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+make
+make modules
+make install
+make modules_install
+depmod
+
+exit
 
 echo "\n--------------------------------------------------------------------------" # LinuxCNC EtherCAT Support Layer
 echo "[Step:4] Install linuxcnc-ethercat:"
