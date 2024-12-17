@@ -61,13 +61,23 @@ echo "--------------------------------------------------------------------------
 echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
 
-echo "\n>> Download Ethercat Master Source Code: "
+echo "\n>> Download Ethercat Master Source Code: \n "
 cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
-echo "\n>> Compile and Install Ethercat Master: "
+echo "\n>> Compile and Install Ethercat Master: \n "
 cd ethercat
 sudo autoupdate
+
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 sudo ./bootstrap
 sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
 sudo make
@@ -91,7 +101,7 @@ echo "\n------------------------------------------------------------------------
 echo "[Step:5] Install hal-cia402:"
 echo "--------------------------------------------------------------------------\n"
 
-echo "\n>> Download hal-cia402 Source Code: "
+echo "\n>> Download hal-cia402 Source Code: \n "
 cd ~
 git clone https://github.com/dbraun1981/hal-cia402
 
@@ -111,7 +121,7 @@ echo "\n------------------------------------------------------------------------
 echo "[Step:6] Download Custom Code:"
 echo "--------------------------------------------------------------------------\n"
 
-echo ">> Download hal-cia402 Source Code: "
+echo ">> Download hal-cia402 Source Code: \n "
 cd ~
 git clone https://github.com/adityapadaria/lcec-project linuxcnc
 
