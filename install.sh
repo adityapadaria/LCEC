@@ -134,10 +134,14 @@ echo
 cd ~
 
 mkdir linuxcnc
-mkdir ./linuxcnc/config
-cd ./linuxcnc/config
+mkdir ./linuxcnc/configs
+cd ./linuxcnc/configs
 
 echo ">> Download hal-cia402 Source Code:"
 git clone https://github.com/adityapadaria/lcec-project
 
 #-------------------------------------------------------------------------------------------
+
+sudo /etc/init.d/ethercat start
+sudo chmod 666 /dev/EtherCAT0
+
