@@ -149,7 +149,7 @@ echo "\n>> Installing ethtool: \n "
 cat > /etc/init.d/lcec <<EOL
 #! /bin/bash
 
-MAC_ADDR=$(ethtool -P eth0 | awk ‘{print $NF}’)
+MAC_ADDR=$(sudo ethtool -P eth0 | awk ‘{print $NF}’)
 modprobe ec_master main_devices=MAC_ADDR
 modprobe ec_genet
 echo fd580000.ethernet > /sys/bus/platform/drivers/bcmgenet/unbind
