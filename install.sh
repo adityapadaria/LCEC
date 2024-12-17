@@ -1,6 +1,6 @@
-echo "\n--------------------------------------------------------------------------" # Update Repository
+echo "\n------------------------------------------------------------------------------------------------------" # Update Repository
 echo "[Step:1] Update APT Repository:"
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 sudo apt update &> /dev/null
 
@@ -47,16 +47,16 @@ echo "\n>> Verify Repository: \n"
 
 sudo apt update
 
-echo "\n--------------------------------------------------------------------------" # LinuxCNC QtPyVCP
+echo "\n------------------------------------------------------------------------------------------------------" # LinuxCNC QtPyVCP
 echo "[Step:2] Install QtPyVCP:"
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Install python3-qtpyvcp: \n "
 sudo apt install -y python3-qtpyvcp &> /dev/null
 
-echo "\n--------------------------------------------------------------------------" # IgH EtherCAT Master
+echo "\n------------------------------------------------------------------------------------------------------" # IgH EtherCAT Master
 echo "[Step:3] Installing IgH EtherCAT Master:"
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
@@ -68,28 +68,22 @@ git clone https://gitlab.com/etherlab.org/ethercat
 echo "\n>> Compile and Install Ethercat Master: \n "
 sudo su
 cd /root/ethercat
-sudo autoupdate
-sudo ./bootstrap
+autoupdate
 
-while true; do
-    read -p "Do you wish to install this program? " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+echo "\n>> Bootstrap: \n "
+./bootstrap
 
-sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
+echo "\n>> Configure: \n "
+./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
 
-while true; do
-    read -p "Do you wish to install this program? " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+# while true; do
+#     read -p "Do you wish to install this program? " yn
+#     case $yn in
+#         [Yy]* ) break;;
+#         [Nn]* ) exit;;
+#         * ) echo "Please answer yes or no.";;
+#     esac
+# done
 
 make
 make modules
@@ -99,20 +93,20 @@ depmod
 
 exit
 
-echo "\n--------------------------------------------------------------------------" # LinuxCNC EtherCAT Support Layer
+echo "\n------------------------------------------------------------------------------------------------------" # LinuxCNC EtherCAT Support Layer
 echo "[Step:4] Install linuxcnc-ethercat:"
 echo "Important Note: "
 echo "Trying to install without installing “ethercat-master” package, but script will install it anyways. "
 echo "At the end of this build process, script will notify they it is already installed. "
 echo "User needs to answer “NO” to this prompt to maintain the manually installed version without EoE. "
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Install linuxcnc-ethercat: \n "
 sudo apt install -y linuxcnc-ethercat
 
-echo "\n--------------------------------------------------------------------------" # LinuxCNC EtherCAT CIA402 Motor Support Layer
+echo "\n------------------------------------------------------------------------------------------------------" # LinuxCNC EtherCAT CIA402 Motor Support Layer
 echo "[Step:5] Install hal-cia402:"
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Download hal-cia402 Source Code: \n "
 cd ~
@@ -122,25 +116,25 @@ echo "\n>> Install hal-cia402:"
 cd hal-cia402
 sudo halcompile --install cia402.comp
 
-# echo "\n--------------------------------------------------------------------------" # Set Permission for EtherCAT Ports from Startup
+# echo "\n------------------------------------------------------------------------------------------------------" # Set Permission for EtherCAT Ports from Startup
 # echo "[Step:6] Set Permission for EtherCAT Ports:"
-# echo "--------------------------------------------------------------------------\n"
+# echo "------------------------------------------------------------------------------------------------------\n"
 
 # touch /etc/udev/rules.d/99-ethercat.rules
 # echo "KERNEL=="EtherCAT[0-9]", MODE="0777"" > /etc/udev/rules.d/99-ethercat.rules
 # udevadm control --reload-rules
 
-echo "\n--------------------------------------------------------------------------" # Custom Code
+echo "\n------------------------------------------------------------------------------------------------------" # Custom Code
 echo "[Step:6] Download Custom Code:"
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 echo ">> Download hal-cia402 Source Code: \n "
 cd ~
 git clone https://github.com/adityapadaria/lcec-project linuxcnc
 
-echo "\n--------------------------------------------------------------------------" # EtherCAT Master Init Config
+echo "\n------------------------------------------------------------------------------------------------------" # EtherCAT Master Init Config
 echo "[Step:7] Config Init:"
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Remove /etc/init.d/ethercat \n "
 sudo rm /etc/init.d/ethercat
@@ -163,6 +157,6 @@ EOL
 chmod 755 /etc/init.d/lcec
 update-rc.d lcec defaults
 
-echo "\n--------------------------------------------------------------------------" # End of Process
+echo "\n------------------------------------------------------------------------------------------------------" # End of Process
 echo " SUCCESS! "
-echo "--------------------------------------------------------------------------\n"
+echo "------------------------------------------------------------------------------------------------------\n"
