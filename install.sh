@@ -62,12 +62,12 @@ echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
 
 echo "\n>> Download Ethercat Master Source Code: \n "
-# cd ~
+cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
 echo "\n>> Compile and Install Ethercat Master: \n "
 sudo su
-cd /root/ethercat
+cd ~/ethercat
 autoupdate
 
 echo "\n>> Bootstrap: \n "
