@@ -1,3 +1,46 @@
+#------------------------------------------------------------------------------------------- Update Repository
+
+echo 
+echo "[Step:0] Update APT Repository:"
+
+apt update
+
+# Removing old repo if it exists
+if [ -e /etc/apt/sources.list.d/ighvh.sources ]
+then
+    echo "removing ethercat repository file\n"
+    rm /etc/apt/sources.list.d/ighvh.sources
+fi
+
+# Install ethercat repositories
+echo "Install ethercat repository"
+mkdir -p /usr/local/share/keyrings/
+wget -O- https://build.opensuse.org/projects/science:EtherLab/signing_keys/download?kind=gpg | gpg --dearmor | dd of=/etc/apt/trusted.gpg.d/science_EtherLab.gpg
+tee -a /etc/apt/sources.list.d/ighvh.sources > /dev/null <<EOT
+Types: deb
+Signed-By: /etc/apt/trusted.gpg.d/science_EtherLab.gpg
+Suites: ./
+URIs: http://download.opensuse.org/repositories/science:/EtherLab/Debian_12/
+EOT
+
+# Install qtpyvcp repositories
+
+apt install curl
+echo 'deb [arch=arm64] https://repository.qtpyvcp.com/apt stable main' | sudo tee /etc/apt/sources.list.d/kcjengr.list
+curl -sS https://repository.qtpyvcp.com/repo/kcjengr.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/kcjengr.gpg
+gpg --keyserver keys.openpgp.org --recv-key 2DEC041F290DF85A
+
+apt update
+
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 #------------------------------------------------------------------------------------------- EtherCAT Master
 
 echo 
@@ -57,4 +100,9 @@ touch /etc/udev/rules.d/99-ethercat.rules
 echo "KERNEL=="EtherCAT[0-9]", MODE="0777"" > /etc/udev/rules.d/99-ethercat.rules
 udevadm control --reload-rules
 
+#------------------------------------------------------------------------------------------- LinuxCNC QtPyVCP
 
+echo 
+echo "[Step:4] Install QtPyVCP:"
+
+apt install python3-qtpyvcp
