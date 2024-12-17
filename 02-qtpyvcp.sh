@@ -10,4 +10,4 @@ echo " "
 echo ">> Install python3-qtpyvcp: "
 echo " "
 
-sudo apt install -y python3-qtpyvcp &> /dev/null
+sudo apt install -y python3-qtpyvcp
