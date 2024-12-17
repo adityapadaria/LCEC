@@ -4,25 +4,15 @@ echo "\n------------------------------------------------------------------------
 echo "[Step:1] Update APT Repository:"
 echo "------------------------------------------------------------------------------------------------------\n"
 
-sudo apt update &> /dev/null
+sudo apt update
+
+echo "\n\n"
 
 # Removing old repository if exists
 if [ -e /etc/apt/sources.list.d/ighvh.sources ]
 then
     echo "\n>> Remove /etc/apt/sources.list.d/ighvh.sources \n "
     sudo rm /etc/apt/sources.list.d/ighvh.sources
-fi
-
-if [ -e /etc/apt/sources.list.d/kcjengr.list ]
-then
-    echo "\n>> Remove /etc/apt/sources.list.d/kcjengr.list \n "
-    sudo rm /etc/apt/sources.list.d/kcjengr.list
-fi
-
-if [ -e /etc/apt/trusted.gpg.d/kcjengr.gpg ]
-then
-    echo "\n>> Remove /etc/apt/trusted.gpg.d/kcjengr.gpg \n "
-    sudo rm /etc/apt/trusted.gpg.d/kcjengr.gpg
 fi
 
 # Install updated repository
@@ -36,8 +26,24 @@ Suites: ./
 URIs: http://download.opensuse.org/repositories/science:/EtherLab/Debian_12/
 EOT
 
+sudo apt update
+
+echo "\n\n"
+
+if [ -e /etc/apt/sources.list.d/kcjengr.list ]
+then
+    echo "\n>> Remove /etc/apt/sources.list.d/kcjengr.list \n "
+    sudo rm /etc/apt/sources.list.d/kcjengr.list
+fi
+
+if [ -e /etc/apt/trusted.gpg.d/kcjengr.gpg ]
+then
+    echo "\n>> Remove /etc/apt/trusted.gpg.d/kcjengr.gpg \n "
+    sudo rm /etc/apt/trusted.gpg.d/kcjengr.gpg
+fi
+
 echo "\n>> Install curl: \n "
-sudo apt install -y curl &> /dev/null
+sudo apt install -y curl
 
 # Install updated repository
 echo "\n>> Install QtPyVCP Repository \n "
@@ -48,6 +54,8 @@ gpg --keyserver keys.openpgp.org --recv-key 2DEC041F290DF85A
 echo "\n>> Verify Repository: \n"
 
 sudo apt update
+
+echo "\n\n"
 
 while true; do
     read -p "\n >> Do you wish to continue?   " yn
@@ -74,48 +82,48 @@ done
 #     esac
 # done
 
-echo "\n------------------------------------------------------------------------------------------------------" # IgH EtherCAT Master
-echo "[Step:3] Installing IgH EtherCAT Master:"
-echo "------------------------------------------------------------------------------------------------------\n"
+# echo "\n------------------------------------------------------------------------------------------------------" # IgH EtherCAT Master
+# echo "[Step:3] Installing IgH EtherCAT Master:"
+# echo "------------------------------------------------------------------------------------------------------\n"
 
-echo "\n>> Installing libtool: \n "
-sudo apt install -y libtool &> /dev/null
+# echo "\n>> Installing libtool: \n "
+# sudo apt install -y libtool &> /dev/null
 
-echo "\n>> Download Ethercat Master Source Code: \n "
-sudo rm -r /root/ethercat
-cd ~
-git clone https://gitlab.com/etherlab.org/ethercat
+# echo "\n>> Download Ethercat Master Source Code: \n "
+# sudo rm -r /root/ethercat
+# cd ~
+# git clone https://gitlab.com/etherlab.org/ethercat
 
-cd /root/ethercat
-sudo autoupdate 
+# cd /root/ethercat
+# sudo autoupdate 
 
-echo "\n>> Bootstrap with Warning: \n "
-sudo ./bootstrap
+# echo "\n>> Bootstrap with Warning: \n "
+# sudo ./bootstrap
 
-sudo autoupdate 
+# sudo autoupdate 
 
-echo "\n>> Bootstrap: \n "
-sudo ./bootstrap
+# echo "\n>> Bootstrap: \n "
+# sudo ./bootstrap
 
-echo "\n>> Configure: \n "
-sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
+# echo "\n>> Configure: \n "
+# sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
 
-echo "\n>> Compile and Install Ethercat Master: \n "
+# echo "\n>> Compile and Install Ethercat Master: \n "
 
-sudo make
-sudo make modules
-sudo make install
-sudo make modules_install
-sudo depmod
+# sudo make
+# sudo make modules
+# sudo make install
+# sudo make modules_install
+# sudo depmod
 
-while true; do
-    read -p "\n >> Do you wish to continue?   " yn
-    case $yn in
-        [Yy]* ) clear; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+# while true; do
+#     read -p "\n >> Do you wish to continue?   " yn
+#     case $yn in
+#         [Yy]* ) clear; break;;
+#         [Nn]* ) exit;;
+#         * ) echo "Please answer yes or no.";;
+#     esac
+# done
 
 echo "\n------------------------------------------------------------------------------------------------------" # LinuxCNC EtherCAT Support Layer
 echo "[Step:4] Install linuxcnc-ethercat:"
