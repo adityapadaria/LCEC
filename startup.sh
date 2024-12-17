@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # MAC_ADDR=$(sudo ethtool -P eth0 | awk ‘{print $NF}’)
-
-MAC_ADDR=$(ip link show eth0 | awk '/ether/ {print $2}')
-modprobe ec_master main_devices=MAC_ADDR
+# MAC_ADDR=$(ip link show eth0 | awk '/ether/ {print $2}')
+# modprobe ec_master main_devices=MAC_ADDR
+modprobe ec_master main_devices=eth0
 modprobe ec_genet
 echo fd580000.ethernet > /sys/bus/platform/drivers/bcmgenet/unbind
 echo fd580000.ethernet > /sys/bus/platform/drivers/ec_bcmgenet/bind
