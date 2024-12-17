@@ -2,7 +2,7 @@ echo "\n------------------------------------------------------------------------
 echo "[Step:1] Update APT Repository:"
 echo "--------------------------------------------------------------------------\n"
 
-sudo apt update
+sudo apt update &> /dev/null
 
 # Removing old repository if exists
 if [ -e /etc/apt/sources.list.d/ighvh.sources ]
@@ -34,7 +34,7 @@ Suites: ./
 URIs: http://download.opensuse.org/repositories/science:/EtherLab/Debian_12/
 EOT
 
-echo "\n>> Installing curl: \n"
+echo "\n>> Install curl: \n "
 sudo apt install -y curl &> /dev/null
 
 # Install updated repository
@@ -43,26 +43,29 @@ echo 'deb [arch=arm64] https://repository.qtpyvcp.com/apt stable main' | sudo te
 curl -sS https://repository.qtpyvcp.com/repo/kcjengr.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/kcjengr.gpg
 gpg --keyserver keys.openpgp.org --recv-key 2DEC041F290DF85A
 
+echo "\n>> Verify Repository: \n"
+
 sudo apt update
 
 echo "\n--------------------------------------------------------------------------" # LinuxCNC QtPyVCP
 echo "[Step:2] Install QtPyVCP:"
 echo "--------------------------------------------------------------------------\n"
 
+echo "\n>> Install python3-qtpyvcp: \n "
 sudo apt install -y python3-qtpyvcp &> /dev/null
 
 echo "\n--------------------------------------------------------------------------" # IgH EtherCAT Master
 echo "[Step:3] Installing IgH EtherCAT Master:"
 echo "--------------------------------------------------------------------------\n"
 
-echo "\n>> Installing libtool: \n"
+echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
 
-echo "\n>> Download Ethercat Master Source Code:"
+echo "\n>> Download Ethercat Master Source Code: "
 cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
-echo "\n>> Compile and Install Ethercat Master:"
+echo "\n>> Compile and Install Ethercat Master: "
 cd ethercat
 sudo autoupdate
 sudo ./bootstrap
@@ -81,13 +84,14 @@ echo "At the end of this build process, script will notify they it is already in
 echo "User needs to answer “NO” to this prompt to maintain the manually installed version without EoE. "
 echo "--------------------------------------------------------------------------\n"
 
+echo "\n>> Install linuxcnc-ethercat: \n "
 sudo apt install -y linuxcnc-ethercat
 
 echo "\n--------------------------------------------------------------------------" # LinuxCNC EtherCAT CIA402 Motor Support Layer
 echo "[Step:5] Install hal-cia402:"
 echo "--------------------------------------------------------------------------\n"
 
-echo "\n>> Download hal-cia402 Source Code:"
+echo "\n>> Download hal-cia402 Source Code: "
 cd ~
 git clone https://github.com/dbraun1981/hal-cia402
 
@@ -107,7 +111,7 @@ echo "\n------------------------------------------------------------------------
 echo "[Step:6] Download Custom Code:"
 echo "--------------------------------------------------------------------------\n"
 
-echo ">> Download hal-cia402 Source Code:"
+echo ">> Download hal-cia402 Source Code: "
 cd ~
 git clone https://github.com/adityapadaria/lcec-project linuxcnc
 
@@ -135,3 +139,7 @@ EOL
 
 chmod 755 /etc/init.d/lcec
 update-rc.d lcec defaults
+
+echo "\n--------------------------------------------------------------------------" # End of Process
+echo " SUCCESS! "
+echo "--------------------------------------------------------------------------\n"
