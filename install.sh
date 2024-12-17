@@ -62,11 +62,11 @@ echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
 
 echo "\n>> Download Ethercat Master Source Code: \n "
-#cd ~
-sudo git clone https://gitlab.com/etherlab.org/ethercat
+cd ~
+git clone https://gitlab.com/etherlab.org/ethercat
 
 echo "\n>> Compile and Install Ethercat Master: \n "
-cd /root/ethercat
+sudo cd /root/ethercat
 sudo autoupdate
 
 echo "\n>> Bootstrap: \n "
@@ -106,8 +106,8 @@ echo "[Step:5] Install hal-cia402:"
 echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Download hal-cia402 Source Code: \n "
-#cd ~
-sudo git clone https://github.com/dbraun1981/hal-cia402
+cd ~
+git clone https://github.com/dbraun1981/hal-cia402
 
 echo "\n>> Install hal-cia402:"
 cd hal-cia402
