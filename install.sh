@@ -77,7 +77,7 @@ done
 
 echo "\n>> Compile and Install Ethercat Master: \n "
 cd /root/ethercat
-autoupdate 
+sudo autoupdate 
 
 while true; do
     read -p "Do you wish to install this program? " yn
@@ -90,6 +90,17 @@ done
 
 echo "\n>> Bootstrap: \n "
 sudo ./bootstrap
+
+while true; do
+    read -p "Do you wish to install this program? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+sudo autoupdate 
 
 while true; do
     read -p "Do you wish to install this program? " yn
