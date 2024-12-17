@@ -65,10 +65,8 @@ echo "\n>> Download Ethercat Master Source Code: \n "
 cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
 
-sudo su
-
 echo "\n>> Compile and Install Ethercat Master: \n "
-sudo cd /root/ethercat
+cd /root/ethercat
 sudo autoupdate
 
 echo "\n>> Bootstrap: \n "
