@@ -16,7 +16,7 @@ echo " "
 echo ">> Download Ethercat Master Source Code: "
 echo " "
 
-sudo rm -r /root/ethercat
+# sudo rm -r /root/ethercat
 
 cd ~
 git clone https://gitlab.com/etherlab.org/ethercat
