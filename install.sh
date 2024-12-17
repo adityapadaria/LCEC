@@ -161,7 +161,7 @@ echo "\n>> Installing ethtool: \n "
 # exit 0
 # EOL
 
-cp /root/lcec-install/setup.sh /etc/init.d/lcec
+cp /root/lcec-install/startup.sh /etc/init.d/lcec
 chmod 755 /etc/init.d/lcec
 update-rc.d lcec defaults
 
