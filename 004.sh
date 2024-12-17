@@ -42,7 +42,7 @@ echo " "
 echo ">> Configure: "
 echo " "
 
-sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too # --enable-genet
+sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet --enable-generic --enable-r8169
 
 echo " "
 echo ">> Compile Library: "
