@@ -146,19 +146,22 @@ sudo rm /etc/init.d/ethercat
 echo "\n>> Installing ethtool: \n "
 # sudo apt install -y ethtool &> /dev/null
 
-cat > /etc/init.d/lcec <<EOL
-#! /bin/bash
+# cat > /etc/init.d/lcec <<EOL
+# #! /bin/bash
 
-MAC_ADDR=$(sudo ethtool -P eth0 | awk ‘{print $NF}’)
-modprobe ec_master main_devices=MAC_ADDR
-modprobe ec_genet
-echo fd580000.ethernet > /sys/bus/platform/drivers/bcmgenet/unbind
-echo fd580000.ethernet > /sys/bus/platform/drivers/ec_bcmgenet/bind
-chmod 666 /dev/EtherCAT0
+# # MAC_ADDR=$(sudo ethtool -P eth0 | awk ‘{print $NF}’)
 
-exit 0
-EOL
+# MAC_ADDR=$(ip link show eth0 | awk '/ether/ {print $2}')
+# modprobe ec_master main_devices=MAC_ADDR
+# modprobe ec_genet
+# echo fd580000.ethernet > /sys/bus/platform/drivers/bcmgenet/unbind
+# echo fd580000.ethernet > /sys/bus/platform/drivers/ec_bcmgenet/bind
+# chmod 666 /dev/EtherCAT0
 
+# exit 0
+# EOL
+
+cp /root/lcec-install/setup.sh /etc/init.d/lcec
 chmod 755 /etc/init.d/lcec
 update-rc.d lcec defaults
 
