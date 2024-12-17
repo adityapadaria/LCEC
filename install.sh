@@ -35,7 +35,7 @@ URIs: http://download.opensuse.org/repositories/science:/EtherLab/Debian_12/
 EOT
 
 echo "\n>> Installing curl: \n"
-sudo apt install -y curl
+sudo apt install -y curl &> /dev/null
 
 # Install updated repository
 echo "\n>> Install QtPyVCP Repository \n "
@@ -49,14 +49,14 @@ echo "\n------------------------------------------------------------------------
 echo "[Step:2] Install QtPyVCP:"
 echo "--------------------------------------------------------------------------\n"
 
-sudo apt install -y python3-qtpyvcp
+sudo apt install -y python3-qtpyvcp &> /dev/null
 
 echo "\n--------------------------------------------------------------------------" # IgH EtherCAT Master
 echo "[Step:3] Installing IgH EtherCAT Master:"
 echo "--------------------------------------------------------------------------\n"
 
 echo "\n>> Installing libtool: \n"
-sudo apt install -y libtool
+sudo apt install -y libtool &> /dev/null
 
 echo "\n>> Download Ethercat Master Source Code:"
 cd ~
@@ -128,6 +128,7 @@ modprobe ec_genet
 echo fd580000.ethernet > /sys/bus/platform/drivers/bcmgenet/unbind
 echo fd580000.ethernet > /sys/bus/platform/drivers/ec_bcmgenet/bind
 chmod 666 /dev/EtherCAT0
+exit
 
 exit 0
 EOL
