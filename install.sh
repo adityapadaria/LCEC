@@ -51,7 +51,7 @@ echo "--------------------------------------------------------------------------
 
 sudo apt install -y python3-qtpyvcp
 
-echo "\n--------------------------------------------------------------------------" # EtherCAT Master
+echo "\n--------------------------------------------------------------------------" # IgH EtherCAT Master
 echo "[Step:3] Installing IgH EtherCAT Master:"
 echo "--------------------------------------------------------------------------\n"
 
@@ -111,8 +111,13 @@ echo ">> Download hal-cia402 Source Code:"
 cd ~
 git clone https://github.com/adityapadaria/lcec-project linuxcnc
 
-echo "\n--------------------------------------------------------------------------" 
+echo "\n--------------------------------------------------------------------------" # EtherCAT Master Init Config
+echo "[Step:7] Config Init:"
+echo "--------------------------------------------------------------------------\n"
 
-sudo /etc/init.d/ethercat start
-sudo chmod 666 /dev/EtherCAT0
+echo "\n>> Remove /etc/init.d/ethercat \n "
+sudo rm /etc/init.d/ethercat
+    
+#sudo /etc/init.d/ethercat start
+#sudo chmod 666 /dev/EtherCAT0
 
