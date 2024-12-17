@@ -68,6 +68,7 @@ git clone https://gitlab.com/etherlab.org/ethercat
 echo "\n>> Compile and Install Ethercat Master: \n "
 cd ethercat
 sudo autoupdate
+sudo ./bootstrap
 
 while true; do
     read -p "Do you wish to install this program? " yn
@@ -78,7 +79,6 @@ while true; do
     esac
 done
 
-sudo ./bootstrap
 sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
 sudo make
 sudo make modules
