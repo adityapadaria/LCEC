@@ -95,16 +95,16 @@ echo "\n>> Install hal-cia402:"
 cd hal-cia402
 sudo halcompile --install cia402.comp
 
-echo "\n--------------------------------------------------------------------------" # Set Permission for EtherCAT Ports from Startup
-echo "[Step:6] Set Permission for EtherCAT Ports:"
-echo "--------------------------------------------------------------------------\n"
+# echo "\n--------------------------------------------------------------------------" # Set Permission for EtherCAT Ports from Startup
+# echo "[Step:6] Set Permission for EtherCAT Ports:"
+# echo "--------------------------------------------------------------------------\n"
 
-touch /etc/udev/rules.d/99-ethercat.rules
-echo "KERNEL=="EtherCAT[0-9]", MODE="0777"" > /etc/udev/rules.d/99-ethercat.rules
-udevadm control --reload-rules
+# touch /etc/udev/rules.d/99-ethercat.rules
+# echo "KERNEL=="EtherCAT[0-9]", MODE="0777"" > /etc/udev/rules.d/99-ethercat.rules
+# udevadm control --reload-rules
 
 echo "\n--------------------------------------------------------------------------" # Custom Code
-echo "[Step:7] Download Custom Code:"
+echo "[Step:6] Download Custom Code:"
 echo "--------------------------------------------------------------------------\n"
 
 echo ">> Download hal-cia402 Source Code:"
@@ -117,7 +117,20 @@ echo "--------------------------------------------------------------------------
 
 echo "\n>> Remove /etc/init.d/ethercat \n "
 sudo rm /etc/init.d/ethercat
-    
-#sudo /etc/init.d/ethercat start
-#sudo chmod 666 /dev/EtherCAT0
 
+cat > /etc/init.d/lcec <<EOL
+#! /bin/bash
+
+sudo su
+MAC_ADDR=$(ethtool -P eth0 | awk ‘{print $NF}’)
+modprobe ec_master main_devices=MAC_ADDR
+modprobe ec_genet
+echo fd580000.ethernet > /sys/bus/platform/drivers/bcmgenet/unbind
+echo fd580000.ethernet > /sys/bus/platform/drivers/ec_bcmgenet/bind
+chmod 666 /dev/EtherCAT0
+
+exit 0
+EOL
+
+chmod 755 /etc/init.d/lcec
+update-rc.d lcec defaults
