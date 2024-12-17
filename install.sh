@@ -62,19 +62,18 @@ echo "\n>> Installing libtool: \n "
 sudo apt install -y libtool &> /dev/null
 
 echo "\n>> Download Ethercat Master Source Code: \n "
-cd ~
-git clone https://gitlab.com/etherlab.org/ethercat
+#cd ~
+sudo git clone https://gitlab.com/etherlab.org/ethercat
 
 echo "\n>> Compile and Install Ethercat Master: \n "
-sudo su
-cd ~/ethercat
-autoupdate
+cd /root/ethercat
+sudo autoupdate
 
 echo "\n>> Bootstrap: \n "
-./bootstrap
+sudo ./bootstrap
 
 echo "\n>> Configure: \n "
-./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
+sudo ./configure --sysconfdir=/etc/ --disable-eoe --disable-8139too --enable-genet
 
 # while true; do
 #     read -p "Do you wish to install this program? " yn
@@ -85,13 +84,11 @@ echo "\n>> Configure: \n "
 #     esac
 # done
 
-make
-make modules
-make install
-make modules_install
-depmod
-
-exit
+sudo make
+sudo make modules
+sudo make install
+sudo make modules_install
+sudo depmod
 
 echo "\n------------------------------------------------------------------------------------------------------" # LinuxCNC EtherCAT Support Layer
 echo "[Step:4] Install linuxcnc-ethercat:"
@@ -109,8 +106,8 @@ echo "[Step:5] Install hal-cia402:"
 echo "------------------------------------------------------------------------------------------------------\n"
 
 echo "\n>> Download hal-cia402 Source Code: \n "
-cd ~
-git clone https://github.com/dbraun1981/hal-cia402
+#cd ~
+sudo git clone https://github.com/dbraun1981/hal-cia402
 
 echo "\n>> Install hal-cia402:"
 cd hal-cia402
