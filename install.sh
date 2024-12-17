@@ -26,6 +26,7 @@ Suites: ./
 URIs: http://download.opensuse.org/repositories/science:/EtherLab/Debian_12/
 EOT
 
+echo "\n>> Verify Repository: \n"
 sudo apt update
 
 echo "\n\n"
@@ -52,7 +53,6 @@ curl -sS https://repository.qtpyvcp.com/repo/kcjengr.key | gpg --dearmor | sudo 
 gpg --keyserver keys.openpgp.org --recv-key 2DEC041F290DF85A
 
 echo "\n>> Verify Repository: \n"
-
 sudo apt update
 
 echo "\n\n"
