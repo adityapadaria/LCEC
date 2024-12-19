@@ -2,12 +2,8 @@
 Description=LCEC Auto Start Service
 
 [Service]
-User=root
-#WorkingDirectory=<directory_of_script e.g. /root>
-ExecStart=/home/cnc/scripts/start-ec.sh
-# # optional items below
-# Restart=always
-# RestartSec=3
+User=cnc
+ExecStart=sudo bash /home/cnc/scripts/start-ec.sh
 
 [Install]
 WantedBy=multi-user.target
