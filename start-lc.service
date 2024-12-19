@@ -9,4 +9,4 @@ ExecStart=/usr/bin/linuxcnc
 # Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical.target
