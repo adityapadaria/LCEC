@@ -5,6 +5,7 @@ After=start-ec.service
 [Service]
 User=cnc
 ExecStart=/usr/bin/linuxcnc '/home/cnc/linuxcnc/configs/ethercatqt/ethercatqt.ini'
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
