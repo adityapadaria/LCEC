@@ -1,11 +1,12 @@
 [Unit]
 Description=LC Auto Start Service
-After=start-ec.service
+# After=start-ec.service
 
 [Service]
 User=cnc
-ExecStart=/usr/bin/linuxcnc '/home/cnc/linuxcnc/configs/ethercatqt/ethercatqt.ini'
-Restart=always
+# ExecStart=/usr/bin/linuxcnc '/home/cnc/linuxcnc/configs/ethercatqt/ethercatqt.ini'
+ExecStart=/usr/bin/linuxcnc
+# Restart=always
 
 [Install]
 WantedBy=multi-user.target
