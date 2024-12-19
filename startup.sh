@@ -1,8 +1,10 @@
 #! /bin/bash
 
-cd ~
+git clone https://github.com/adityapadaria/lcec-install /home/cnc/scripts
 
-git clone https://github.com/adityapadaria/lcec-install
+cd /home/cnc/scripts
+
+sudo chmod +x startup.sh
 
 if lsmod | grep -wq ec_genet; then
   rmmod ec_genet
