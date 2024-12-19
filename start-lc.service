@@ -1,9 +1,10 @@
 [Unit]
-Description=LCEC Auto Start Service
+Description=LC Auto Start Service
+After=start-ec.service
 
 [Service]
 User=cnc
-ExecStart=bash /home/cnc/scripts/start-lc.sh
+ExecStart=/usr/bin/linuxcnc '/home/cnc/linuxcnc/configs/ethercatqt/ethercatqt.ini'
 
 [Install]
 WantedBy=multi-user.target
