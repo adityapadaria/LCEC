@@ -10,5 +10,6 @@ echo " "
 echo ">> Download Custom Source Code: "
 echo " "
 
-cd ~
-git clone https://github.com/adityapadaria/lcec-project linuxcnc
+sudo rm -r /home/cnc/linuxcnc
+
+git clone https://github.com/adityapadaria/lcec-project /home/cnc/linuxcnc
